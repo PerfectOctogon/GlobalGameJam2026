@@ -1,186 +1,266 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FirstPersonMovement : MonoBehaviour
 {
     CharacterController characterController;
+
+    [Header("Movement")]
     public float speed = 12f;
     public float gravity = -12f;
     public float jumpHeight = 4f;
-    public float slideSpeed = 12f; // Sliding speed, should be less than or equal to running speed
-    public float initialSlideSpeed = 30f;
-    public float slideDeceleration = 5f; // Rate at which speed decreases during sliding
-    public float fastDescentGravity = -20f; // Gravity when sliding in the air
-    public float bubbleGravity = -2f; // Gravity when floating in the bubble
+
+    [Header("Ground Check")]
     public Transform groundCheck;
-    public Camera mainCamera;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
-    public float normalHeight = 2f; // Normal height of the character
-    public float slideHeight = 1f;  // Height of the character when sliding
-    public float slideCameraOffsetY = -0.5f; // Camera offset when sliding
+    [Header("Audio")]
+    private AudioSource audioSource;
+    public AudioClip runningClip;
 
-    public float bubbleSolutionAmount = 10f; // Total amount of bubble solution available
-    public float bubbleConsumptionRate = 1f; // Rate at which bubble solution is consumed per second
-	public GameObject bubble;
+    /* ================= POWER UPS ================= */
+
+    [Header("Power-Ups (Unlock Flags)")]
+    public bool canUseSpeedPowerUp = false;
+    public bool canUseJumpPowerUp = false;
+    public bool canUseDashPowerUp = false;
+
+    private bool speedPowerUpActive = false;
+    private bool jumpPowerUpActive = false;
+    private bool dashPowerUpActive = false;
+
+    private float baseSpeed;
+
+    /* ================ DOUBLE JUMP ================= */
+
+    private int jumpCount = 0;
+    private int maxJumps = 1;
+
+    /* =================== DASH ===================== */
+
+    [Header("Dash")]
+    public float dashSpeedMultiplier = 6f;   // how insane the dash is
+    public float dashDuration = 0.15f;
+    public float dashCooldown = 1f;
+
+    private bool isDashing = false;
+    private float dashTimer;
+    private float dashCooldownTimer;
+    private float cachedSpeed;
+
+    /* ============================================= */
+
+    [Header("Mask")]
+    public MaskUIManager maskUIManager;
 
     Vector3 velocity;
-    Vector3 slideDirection;
     bool isGrounded;
-    private bool isRunning;
-    bool isSliding = false;
-    bool isInBubble = false;
-    private AudioSource audioSource;
-    public AudioSource audioSource2;
-    public AudioClip slidingClip;
-    public AudioClip runningClip;
-    public AudioClip bubbleBlowClip;
-    public AudioClip bubblePopClip;
-    
-    private Vector3 originalCameraPosition;
+    bool isRunning;
 
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
-        originalCameraPosition = mainCamera.transform.localPosition;
         audioSource = GetComponent<AudioSource>();
+
+        baseSpeed = speed;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
-        if (isGrounded && velocity.y < 0 && isInBubble)
-        {
-            velocity.y = -2f;
-            isInBubble = false; // Reset bubble state when grounded
-			bubble.SetActive(false);
-            audioSource2.PlayOneShot(bubblePopClip);
-        }
-
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        Vector3 move = transform.right * x + transform.forward * z;
-
-        if (move.magnitude >= 0 && !(isInBubble) && !(isSliding) && (isGrounded))
-        {
-            print("Something");
-            isRunning = true;
-            isSliding = false;
-            PlaySound(runningClip);
-        }
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            if (!isSliding)
-            {
-                // Capture the direction when sliding starts
-                slideDirection = move.normalized;
-                isSliding = true;
-                PlaySound(slidingClip);
-                isRunning = false;
-                // Adjust the character controller for sliding
-                characterController.height = slideHeight;
-
-                // Adjust camera position
-                mainCamera.transform.localPosition = new Vector3(originalCameraPosition.x, originalCameraPosition.y + slideCameraOffsetY, originalCameraPosition.z);
-            }
-
-            // Move in the captured slide direction
-            characterController.Move(slideDirection * slideSpeed * Time.deltaTime);
-            slideSpeed = Mathf.Max(0, slideSpeed - slideDeceleration * Time.deltaTime); // Gradually reduce speed
-
-            if (!isGrounded && isInBubble)
-            {
-                isInBubble = false; // Pop the bubble if in the air
-				bubble.SetActive(false);
-                audioSource2.PlayOneShot(bubblePopClip);
-                velocity.y = fastDescentGravity; // Fast descent when sliding in the air
-            }
-        }
-        else
-        {
-            if (isSliding)
-            {
-                isRunning = true;
-                // Reset the character controller to normal height
-                characterController.height = normalHeight;
-
-                // Reset camera position
-                mainCamera.transform.localPosition = originalCameraPosition;
-            }
-
-            isSliding = false;
-            slideSpeed = initialSlideSpeed; // Reset slide speed when not sliding
-            characterController.Move(move * speed * Time.deltaTime); // Allow normal movement
-        }
-
-        if (!(isRunning) && !(isSliding))
-        {
-            audioSource.clip = null;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (isGrounded)
-            {
-                velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
-            }
-            else if (!isInBubble && bubbleSolutionAmount > 0)
-            {
-                isInBubble = true; // Activate bubble
-                audioSource2.PlayOneShot(bubbleBlowClip);
-				bubble.SetActive(true);
-            }
-            audioSource.clip = null;
-        }
-
-        if (isInBubble)
-        {
-            velocity.y += bubbleGravity * Time.deltaTime; // Slow descent in bubble
-            bubbleSolutionAmount -= bubbleConsumptionRate * Time.deltaTime; // Consume bubble solution
-
-            if (bubbleSolutionAmount <= 0)
-            {
-                isInBubble = false; // Deactivate bubble if solution runs out
-                audioSource2.PlayOneShot(bubblePopClip);
-				bubble.SetActive(false);
-            }
-        }
-        else
-        {
-            velocity.y += gravity * Time.deltaTime;
-        }
+        HandleGroundCheck();
+        HandlePowerUpInput();
+        HandleDash();
+        HandleMovement();
+        HandleJump();
+        ApplyGravity();
 
         characterController.Move(velocity * Time.deltaTime);
     }
 
-    public float GetCurrentPlayerSpeed()
+    /* ===================== INPUT ===================== */
+
+    void HandlePowerUpInput()
     {
-        if (isSliding)
-        {
-            return slideSpeed;
-        }
+        if (Input.GetKeyDown(KeyCode.Alpha1) && canUseSpeedPowerUp)
+            ActivateSpeedPowerUp();
+
+        if (Input.GetKeyDown(KeyCode.Alpha2) && canUseJumpPowerUp)
+            ActivateJumpPowerUp();
+
+        if (Input.GetKeyDown(KeyCode.Alpha3) && canUseDashPowerUp)
+            ActivateAllPowerUps();
+    }
+
+    void EnableSpeedPowerUp()
+    {
+        this.canUseSpeedPowerUp = true;
+        maskUIManager.EnableSpeedMask();
+    }
+
+    void EnableDoubleJumpPowerUp()
+    {
+        this.canUseJumpPowerUp = true;
+        maskUIManager.EnableDoubleJumpMask();
+    }
+
+    void EnableDashPowerUp()
+    {
+        this.canUseDashPowerUp = true;
+        maskUIManager.EnableUltimateMask();
+    }
+
+    void ActivateSpeedPowerUp()
+    {
+        DisableAllPowerUps();
+        maskUIManager.ActivateSpeedMask();
+        speedPowerUpActive = true;
+
+        speed = baseSpeed * 2f;
+        maxJumps = 1;
+    }
+
+    void ActivateJumpPowerUp()
+    {
+        DisableAllPowerUps();
+        maskUIManager.ActivateDoubleJumpMask();
+        jumpPowerUpActive = true;
+
+        speed = baseSpeed;
+        maxJumps = 2;
+    }
+
+    void ActivateDashPowerUp()
+    {
+        DisableAllPowerUps();
+        maskUIManager.ActivateUltimateMask();
+        dashPowerUpActive = true;
+
+        speed = baseSpeed;
+        maxJumps = 1;
+    }
+
+    void DisableAllPowerUps()
+    {
+        speedPowerUpActive = false;
+        jumpPowerUpActive = false;
+        dashPowerUpActive = false;
+
+        speed = baseSpeed;
+        maxJumps = 1;
+    }
+
+    void ActivateAllPowerUps()
+    {
+        maskUIManager.ActivateUltimateMask();
+        
+        speedPowerUpActive = true;
+        jumpPowerUpActive = true;
+        dashPowerUpActive = true;
+        
+        speed = baseSpeed * 2f;
+        maxJumps = 2;
+        dashPowerUpActive = true;
+    }
+
+    /* =================== MOVEMENT =================== */
+
+    void HandleMovement()
+    {
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+
+        Vector3 move = transform.right * x + transform.forward * z;
+        characterController.Move(move * speed * Time.deltaTime);
+
+        isRunning = move.magnitude > 0 && isGrounded;
+
+        if (isRunning)
+            PlaySound(runningClip);
         else
+            audioSource.clip = null;
+    }
+
+
+    /* ===================== DASH ===================== */
+
+    void HandleDash()
+    {
+        dashCooldownTimer -= Time.deltaTime;
+
+        if (!dashPowerUpActive)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing && dashCooldownTimer <= 0)
         {
-            float x = Input.GetAxis("Horizontal");
-            float z = Input.GetAxis("Vertical");
-            Vector3 move = transform.right * x + transform.forward * z;
-            return move.magnitude * speed;
+            isDashing = true;
+            dashTimer = dashDuration;
+            dashCooldownTimer = dashCooldown;
+
+            cachedSpeed = speed;
+            speed = baseSpeed * dashSpeedMultiplier;
+        }
+
+        if (isDashing)
+        {
+            dashTimer -= Time.deltaTime;
+
+            if (dashTimer <= 0)
+            {
+                isDashing = false;
+                speed = cachedSpeed;
+            }
         }
     }
 
-    private void PlaySound(AudioClip clip)
+    /* ===================== JUMP ===================== */
+
+    void HandleJump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumps)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            jumpCount++;
+        }
+    }
+
+    /* ==================== PHYSICS =================== */
+
+    void HandleGroundCheck()
+    {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+            jumpCount = 0;
+        }
+    }
+
+    void ApplyGravity()
+    {
+        if (!isDashing)
+            velocity.y += gravity * Time.deltaTime;
+    }
+
+    /* ===================== AUDIO ==================== */
+
+    void PlaySound(AudioClip clip)
     {
         if (audioSource.clip != clip || !audioSource.isPlaying)
         {
             audioSource.clip = clip;
-            audioSource.loop = clip == runningClip || clip == slidingClip;
+            audioSource.loop = true;
             audioSource.Play();
         }
+    }
+
+    /* ===================== DEBUG ==================== */
+
+    public float GetCurrentPlayerSpeed()
+    {
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+        Vector3 move = transform.right * x + transform.forward * z;
+        return move.magnitude * speed;
     }
 }
