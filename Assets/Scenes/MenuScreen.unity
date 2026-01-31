@@ -2032,7 +2032,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5552639021332ddbba6bc99516292ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTexts: []
+  playerTexts:
+  - {fileID: 172429602}
+  - {fileID: 244836218}
+  - {fileID: 672522917}
+  - {fileID: 1880548520}
+  - {fileID: 1258945467}
+  - {fileID: 943967487}
+  - {fileID: 2009457606}
+  - {fileID: 758305486}
+  - {fileID: 1245131223}
+  - {fileID: 239611963}
 --- !u!1 &1515029033
 GameObject:
   m_ObjectHideFlags: 0
