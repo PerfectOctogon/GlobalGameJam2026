@@ -65,7 +65,7 @@ public class ProceduralRoomGenerator : MonoBehaviour
             int roomTypeIndex = Random.Range(0, 3);
             int roomIndex;
             GameObject newRoom;
-
+            roomTypeIndex = 0;
             if (currRoom == numRoomsBeforeEndRoom)
             {
                 roomTypeIndex = 3;
