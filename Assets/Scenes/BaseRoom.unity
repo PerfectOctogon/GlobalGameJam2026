@@ -414,6 +414,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3281562429952716368, guid: a1763e7ba0cdd584fa13085278dd8252, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 34.567986
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281562429952716368, guid: a1763e7ba0cdd584fa13085278dd8252, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 13.800513
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281562429952716368, guid: a1763e7ba0cdd584fa13085278dd8252, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -17.9944
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281562429952716368, guid: a1763e7ba0cdd584fa13085278dd8252, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.9177
+      objectReference: {fileID: 0}
     - target: {fileID: 5054600715999257565, guid: a1763e7ba0cdd584fa13085278dd8252, type: 3}
       propertyPath: m_Name
       value: ArtRoomBroken
