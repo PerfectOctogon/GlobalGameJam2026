@@ -22,6 +22,7 @@ public class DoorSwingOpen : MonoBehaviour
         // Check if the player is within the specified distance
         if (distanceToPlayer <= openDistance && !doorOpen)
         {
+            print(distanceToPlayer);
             // Play the door open animation
             animator.SetTrigger("OpenDoor");
             doorOpen = true;
