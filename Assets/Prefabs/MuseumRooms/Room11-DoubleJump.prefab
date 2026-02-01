@@ -114,6 +114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4657714292342146631}
+  - component: {fileID: 8982567007784389350}
   m_Layer: 0
   m_Name: Room11-DoubleJump
   m_TagString: Untagged
@@ -151,6 +152,19 @@ Transform:
   - {fileID: 6426799863486433097}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8982567007784389350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56253267911347405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9c3bf70b714b7989de0c2ccc300257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exitPoint: {fileID: 0}
 --- !u!1 &136591802171475096
 GameObject:
   m_ObjectHideFlags: 0

@@ -6037,6 +6037,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7359579845106292917}
+  - component: {fileID: 1425665051679868245}
   m_Layer: 0
   m_Name: SpeedMaskRoom
   m_TagString: Untagged
@@ -6075,6 +6076,19 @@ Transform:
   - {fileID: 9129731679908868622}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1425665051679868245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983243859542632791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9c3bf70b714b7989de0c2ccc300257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exitPoint: {fileID: 0}
 --- !u!1001 &565943761068153364
 PrefabInstance:
   m_ObjectHideFlags: 0

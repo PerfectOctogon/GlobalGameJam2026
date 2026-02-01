@@ -8207,6 +8207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7662968474189641947}
+  - component: {fileID: -5998305796463846705}
   m_Layer: 0
   m_Name: Room7-RightTurnRoom
   m_TagString: Untagged
@@ -8244,6 +8245,19 @@ Transform:
   - {fileID: 5215860778275182928}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5998305796463846705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7767589511262788225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9c3bf70b714b7989de0c2ccc300257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exitPoint: {fileID: 0}
 --- !u!1 &8063335286679512482
 GameObject:
   m_ObjectHideFlags: 0

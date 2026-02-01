@@ -1181,12 +1181,12 @@ MonoBehaviour:
   m_margin: {x: 9.5536, y: 2.2380934, z: 9.488551, w: 2.0085409}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1570517116346857117}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &2557644938267085218
 GameObject:
   m_ObjectHideFlags: 0
@@ -3764,12 +3764,12 @@ MonoBehaviour:
   m_margin: {x: 9.5536, y: 2.1663923, z: 9.488551, w: 1.9117353}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 9112810385794366011}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &5773742392792092732
 GameObject:
   m_ObjectHideFlags: 0
@@ -3810,6 +3810,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4609663794106854216}
+  - component: {fileID: -5834129539561368263}
   m_Layer: 0
   m_Name: ArtRoomBroken2
   m_TagString: Untagged
@@ -3877,6 +3878,19 @@ Transform:
   - {fileID: 4157755555789730756}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5834129539561368263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5813387020197858846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9c3bf70b714b7989de0c2ccc300257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exitPoint: {fileID: 0}
 --- !u!1 &5947368142436763798
 GameObject:
   m_ObjectHideFlags: 0
@@ -4878,12 +4892,12 @@ MonoBehaviour:
   m_margin: {x: 9.5536, y: 2.2380934, z: 9.488551, w: 2.0085409}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 2442161718938301241}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &8087693788713845534
 GameObject:
   m_ObjectHideFlags: 0

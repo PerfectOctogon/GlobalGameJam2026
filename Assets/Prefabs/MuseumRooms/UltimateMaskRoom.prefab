@@ -1852,6 +1852,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4171775744857046457}
+  - component: {fileID: 290205329945356749}
   m_Layer: 0
   m_Name: UltimateMaskRoom
   m_TagString: Untagged
@@ -1888,6 +1889,19 @@ Transform:
   - {fileID: 3828943471457420082}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &290205329945356749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3923860195779632113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9c3bf70b714b7989de0c2ccc300257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exitPoint: {fileID: 0}
 --- !u!1 &4084425068062772573
 GameObject:
   m_ObjectHideFlags: 0
@@ -6642,6 +6656,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e706bee04e91ed2499f6b1d2f08f51f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alarmScript: {fileID: 0}
+  alarmSound: {fileID: 0}
+  blockedDoor: {fileID: 0}
 --- !u!1001 &6679742862613181101
 PrefabInstance:
   m_ObjectHideFlags: 0

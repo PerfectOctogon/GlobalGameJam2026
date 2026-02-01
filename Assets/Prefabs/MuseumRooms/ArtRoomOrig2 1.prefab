@@ -310,12 +310,12 @@ MonoBehaviour:
   m_margin: {x: 9.5536, y: 2.2380934, z: 9.488551, w: 2.0085409}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 7059987850475816809}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &677805452456814917
 GameObject:
   m_ObjectHideFlags: 0
@@ -3836,12 +3836,12 @@ MonoBehaviour:
   m_margin: {x: 9.5536, y: 2.1663923, z: 9.488551, w: 1.9117353}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 2920565730779905623}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &8920878657739009423
 GameObject:
   m_ObjectHideFlags: 0
@@ -4007,12 +4007,12 @@ MonoBehaviour:
   m_margin: {x: 9.5536, y: 2.2380934, z: 9.488551, w: 2.0085409}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 2668820725732460212}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &8952016545029098909
 GameObject:
   m_ObjectHideFlags: 0
@@ -4053,6 +4053,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5945261742941353735}
+  - component: {fileID: 1982763255260623784}
   m_Layer: 0
   m_Name: ArtRoomOrig2 1
   m_TagString: Untagged
@@ -4120,6 +4121,19 @@ Transform:
   - {fileID: 5969181336181861820}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1982763255260623784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9159729956573196236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9c3bf70b714b7989de0c2ccc300257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exitPoint: {fileID: 0}
 --- !u!1 &9182314739827032862
 GameObject:
   m_ObjectHideFlags: 0

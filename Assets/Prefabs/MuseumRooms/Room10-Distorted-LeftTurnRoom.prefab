@@ -6211,6 +6211,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4721226315843215378}
+  - component: {fileID: -2612045959639365800}
   m_Layer: 0
   m_Name: Room10-Distorted-LeftTurnRoom
   m_TagString: Untagged
@@ -6248,6 +6249,19 @@ Transform:
   - {fileID: 6259689531918345009}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+--- !u!114 &-2612045959639365800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6113988915739867532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9c3bf70b714b7989de0c2ccc300257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exitPoint: {fileID: 0}
 --- !u!1 &6145760737501911847
 GameObject:
   m_ObjectHideFlags: 0
