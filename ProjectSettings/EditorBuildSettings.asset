@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Congratulations.unity
     guid: 1429b5477e5a2b249a81fcea7a52ce86
+  - enabled: 1
+    path: Assets/Scenes/BaseRoom.unity
+    guid: 5f26a6aa17bc2094480760f737d77d7e
   m_configObjects: {}
