@@ -91,19 +91,19 @@ public class FirstPersonMovement : MonoBehaviour
             ActivateAllPowerUps();
     }
 
-    void EnableSpeedPowerUp()
+    public void EnableSpeedPowerUp()
     {
         this.canUseSpeedPowerUp = true;
         maskUIManager.EnableSpeedMask();
     }
 
-    void EnableDoubleJumpPowerUp()
+    public void EnableDoubleJumpPowerUp()
     {
         this.canUseJumpPowerUp = true;
         maskUIManager.EnableDoubleJumpMask();
     }
 
-    void EnableDashPowerUp()
+    public void EnableDashPowerUp()
     {
         this.canUseDashPowerUp = true;
         maskUIManager.EnableUltimateMask();
