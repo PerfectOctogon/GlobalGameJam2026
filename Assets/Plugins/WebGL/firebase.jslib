@@ -3,26 +3,13 @@
 
     console.log("Unity requested leaderboard...");
 
-    function waitForFirebase(callback) {
-      if (typeof firebase !== "undefined") {
-        callback();
-      } else {
-        console.log("Waiting for Firebase...");
-        setTimeout(() => waitForFirebase(callback), 200);
-      }
-    }
+    const db = firebase.firestore();
 
-    waitForFirebase(async function () {
-
-      console.log("Firebase ready, fetching Firestore...");
-
-      const db = firebase.firestore();
-
-      try {
-        const snapshot = await db.collection("leaderboard")
-          .orderBy("time")
-          .limit(10)
-          .get();
+    db.collection("leaderboard")
+      .orderBy("time")
+      .limit(10)
+      .get()
+      .then(snapshot => {
 
         let players = [];
         snapshot.forEach(doc => {
@@ -41,10 +28,29 @@
         } else {
           console.error("Unity instance not ready.");
         }
-
-      } catch (err) {
+      })
+      .catch(err => {
         console.error("Firestore fetch failed:", err);
-      }
+      });
+  },
+
+  submitScore: function (namePtr, timeValue) {
+
+    const playerName = UTF8ToString(namePtr);
+
+    console.log("Submitting score:", playerName, timeValue);
+
+    const db = firebase.firestore();
+
+    db.collection("leaderboard").add({
+      name: playerName,
+      time: timeValue
+    })
+    .then(() => {
+      console.log("Score uploaded successfully!");
+    })
+    .catch(err => {
+      console.error("Upload failed:", err);
     });
   }
 });
