@@ -4,7 +4,7 @@ public class GameSession : MonoBehaviour
 {
     public static GameSession Instance;
 
-    public string playerName;
+    public static string playerName;
     public float currentTime;
     public bool timerRunning = false;
 
