@@ -11,7 +11,7 @@ public class PlayMenuController : MonoBehaviour
     public TextMeshProUGUI warningText;
 
     [Header("Scene Settings")]
-    public string gameSceneName = "GameScene";
+    public string gameSceneName = "AdiRooms";
 
     void Start()
     {
