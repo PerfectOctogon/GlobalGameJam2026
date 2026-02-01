@@ -19,7 +19,7 @@ public class CongratsUploader : MonoBehaviour
     {
         // Load values from GameSession
         string playerName = GameSession.playerName;
-        float finalTime = GameSession.Instance.currentTime;
+        float finalTime = GameSession.currentTime;
 
         if (playerNameText != null)
             playerNameText.text = playerName + "!";
