@@ -3281,7 +3281,7 @@ MonoBehaviour:
   nameInputField: {fileID: 341421572}
   playButton: {fileID: 1253381468}
   warningText: {fileID: 1420603237}
-  gameSceneName: AdiRooms
+  gameSceneName: BaseRoom
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

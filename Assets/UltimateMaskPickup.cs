@@ -5,6 +5,7 @@ public class UltimateMaskPickup : MonoBehaviour
     public AlarmScript alarmScript;
     public GameObject alarmSound;
     public GameObject blockedDoor;
+    public GameObject intenseMusic;
     
     private void OnTriggerEnter(Collider other)
     {
@@ -22,6 +23,7 @@ public class UltimateMaskPickup : MonoBehaviour
                 alarmScript.enabled = true;
                 alarmSound.SetActive(true);
                 blockedDoor.SetActive(true);
+                intenseMusic.SetActive(true);
 
                 Destroy(gameObject);
             }
