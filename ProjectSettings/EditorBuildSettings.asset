@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/InstructionScreen.unity
     guid: e229fed2bdde343f4a81d30d38737b1c
+  - enabled: 1
+    path: Assets/Scenes/AdiRooms.unity
+    guid: ddbe532d672adf91dbbd0811c20b2c45
+  - enabled: 1
+    path: Assets/Scenes/DeathScreen.unity
+    guid: 6cac758484d88e9a9945267d39657906
   m_configObjects: {}
