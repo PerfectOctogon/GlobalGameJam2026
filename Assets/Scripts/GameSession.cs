@@ -5,7 +5,7 @@ public class GameSession : MonoBehaviour
     public static GameSession Instance;
 
     public static string playerName;
-    public float currentTime;
+    public static float currentTime;
     public bool timerRunning = false;
 
     void Awake()
