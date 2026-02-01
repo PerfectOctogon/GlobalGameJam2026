@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class UltimateMaskPickup : MonoBehaviour
 {
+    public AlarmScript alarmScript;
+    public GameObject alarmSound;
+    public GameObject blockedDoor;
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -14,6 +18,10 @@ public class UltimateMaskPickup : MonoBehaviour
                 movement.EnableDashPowerUp();
                 movement.EnableDoubleJumpPowerUp();
                 movement.EnableSpeedPowerUp();
+                
+                alarmScript.enabled = true;
+                alarmSound.SetActive(true);
+                blockedDoor.SetActive(true);
 
                 Destroy(gameObject);
             }
