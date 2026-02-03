@@ -17,17 +17,24 @@ public class CongratsUploader : MonoBehaviour
 
     void Start()
     {
-        // Load values from GameSession
-        string playerName = GameSession.playerName;
-        float finalTime = GameSession.currentTime;
+        if (GameSession.Instance == null)
+        {
+            Debug.LogError("GameSession not found!");
+            return;
+        }
+
+        GameSession.Instance.EndRun();
+
+        string playerName = GameSession.Instance.playerName;
+        float finalTime = GameSession.Instance.currentTime;
 
         if (playerNameText != null)
-            playerNameText.text = playerName + "!";
+            playerNameText.text = "Congrats " + playerName + "!";
 
         if (playerTimeText != null)
             playerTimeText.text = $"{finalTime:0.00} seconds";
 
-        Debug.Log("Congrats Screen Loaded:");
+        Debug.Log("Final Score:");
         Debug.Log("Player = " + playerName);
         Debug.Log("Time = " + finalTime);
 

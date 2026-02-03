@@ -15,11 +15,9 @@ public class PlayMenuController : MonoBehaviour
 
     void Start()
     {
-        // Clear warning at start
         if (warningText != null)
             warningText.text = "";
 
-        // Hook button click
         if (playButton != null)
             playButton.onClick.AddListener(OnPlayPressed);
     }
@@ -40,9 +38,15 @@ public class PlayMenuController : MonoBehaviour
             return;
         }
 
-        GameSession.playerName = playerName;
+        if (GameSession.Instance == null)
+        {
+            Debug.LogError("GameSession object not found in scene!");
+            return;
+        }
 
-        Debug.Log("Player name set to: " + playerName);
+        GameSession.Instance.StartRun(playerName);
+
+        Debug.Log("Run started for: " + playerName);
 
         SceneManager.LoadScene(gameSceneName);
     }

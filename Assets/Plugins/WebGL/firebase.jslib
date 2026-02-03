@@ -7,7 +7,6 @@
 
     db.collection("leaderboard")
       .orderBy("time")
-      .limit(10)
       .get()
       .then(snapshot => {
 
