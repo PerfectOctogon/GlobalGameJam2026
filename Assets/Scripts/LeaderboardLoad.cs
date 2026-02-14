@@ -1,80 +1,86 @@
+using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using System.Collections.Generic;
+using UnityEngine.UI;
+
+#if UNITY_WEBGL && !UNITY_EDITOR
 using System.Runtime.InteropServices;
-
-[System.Serializable]
-public class PlayerEntry
-{
-    public string name;
-    public float time;
-}
-
-[System.Serializable]
-public class LeaderboardData
-{
-    public List<PlayerEntry> players;
-}
+#endif
 
 public class LeaderboardLoad : MonoBehaviour
 {
-    [Header("Assign Player1–Player10 Text Objects")]
-    public TextMeshProUGUI[] playerTexts;
+    [Header("UI References")]
+    public Transform contentParent;
+    public GameObject entryPrefab;
 
 #if UNITY_WEBGL && !UNITY_EDITOR
     [DllImport("__Internal")]
-    private static extern void getLeaderboardData();
+    private static extern void GetLeaderboardData();
 #endif
 
     void Start()
     {
+        LoadLeaderboard();
+    }
+
+    public void LoadLeaderboard()
+    {
+        Debug.Log("[Unity] Requesting leaderboard...");
+
 #if UNITY_WEBGL && !UNITY_EDITOR
-        Debug.Log("Requesting leaderboard from JavaScript...");
-        getLeaderboardData();
+        GetLeaderboardData();
 #else
-        Debug.Log("Editor mode — WebGL leaderboard disabled.");
-        DisplayEmpty();
+        Debug.LogWarning("Leaderboard only works in WebGL build.");
 #endif
     }
 
-    // Called by JavaScript SendMessage
     public void OnLeaderboardData(string json)
     {
-        Debug.Log("Received JSON: " + json);
+        Debug.Log("[Unity] Leaderboard received!");
+        Debug.Log(json);
 
-        LeaderboardData data = JsonUtility.FromJson<LeaderboardData>(json);
-
-        if (data == null || data.players == null || data.players.Count == 0)
+        // Clear old rows
+        foreach (Transform child in contentParent)
         {
-            DisplayEmpty();
+            Destroy(child.gameObject);
+        }
+
+        LeaderboardWrapper wrapper =
+            JsonUtility.FromJson<LeaderboardWrapper>(json);
+
+        if (wrapper == null || wrapper.players == null)
+        {
+            Debug.LogError("Invalid leaderboard JSON.");
             return;
         }
 
-        data.players.Sort((a, b) => a.time.CompareTo(b.time));
-        DisplayLeaderboard(data.players);
+        for (int i = 0; i < wrapper.players.Count; i++)
+        {
+            PlayerData p = wrapper.players[i];
+
+            GameObject row = Instantiate(entryPrefab, contentParent);
+
+            TMP_Text text = row.GetComponentInChildren<TMP_Text>();
+
+            text.text = $"{i + 1}. {p.name} - {p.time:0.00}s";
+        }
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(
+            contentParent.GetComponent<RectTransform>()
+        );
     }
 
-    void DisplayLeaderboard(List<PlayerEntry> players)
+    [Serializable]
+    public class PlayerData
     {
-        int count = Mathf.Min(players.Count, playerTexts.Length);
-
-        for (int i = 0; i < count; i++)
-        {
-            string n = string.IsNullOrEmpty(players[i].name) ? "---" : players[i].name;
-            playerTexts[i].text = $"{i + 1}. {n} - {players[i].time:0.00}s";
-        }
-
-        for (int i = count; i < playerTexts.Length; i++)
-        {
-            playerTexts[i].text = $"{i + 1}. ---";
-        }
+        public string name;
+        public float time;
     }
 
-    void DisplayEmpty()
+    [Serializable]
+    public class LeaderboardWrapper
     {
-        for (int i = 0; i < playerTexts.Length; i++)
-        {
-            playerTexts[i].text = $"{i + 1}. ---";
-        }
+        public List<PlayerData> players;
     }
 }

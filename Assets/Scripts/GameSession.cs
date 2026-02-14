@@ -6,7 +6,7 @@ public class GameSession : MonoBehaviour
 
     public string playerName;
     public float currentTime;
-    public bool timerRunning = false;
+    public bool timerRunning;
 
     void Awake()
     {
@@ -32,10 +32,13 @@ public class GameSession : MonoBehaviour
         playerName = name;
         currentTime = 0f;
         timerRunning = true;
+
+        Debug.Log("Timer started.");
     }
 
     public void EndRun()
     {
         timerRunning = false;
+        Debug.Log("Timer stopped at: " + currentTime);
     }
 }

@@ -13,7 +13,7 @@ public class Obstacle : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             // Reload the current scene
-            SceneManager.LoadScene(5);
+            SceneManager.LoadScene(3);
         }
     }
 }

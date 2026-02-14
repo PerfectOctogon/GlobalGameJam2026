@@ -17,7 +17,7 @@ public class EndRoomScript : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         if (other.CompareTag("Player"))
         {
-            sceneLoader.LoadScene(2);
+            sceneLoader.LoadScene(4);
         }
     }
 }
